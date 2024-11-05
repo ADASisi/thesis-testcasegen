@@ -63,7 +63,7 @@ _Showcase interactive previews, rule selection screens, and structure verificati
 This project was made possible through the guidance and support of my thesis advisor Petar Ivanov from GlobalFoundries.
 
 ## 📝 Author
-Developed by Silvia Antova, combining passion for software and semiconductor design. For queries or collaboration opportunities, reach out at [your.email@example.com].
+Developed by Silvia Antova.
 
 ---
 
