@@ -1,0 +1,49 @@
+import gdspy
+import random
+
+step = 0.001
+
+number_of_tests = 3
+
+base = 1
+
+
+def generate_polygon_points(x, y, width, height):
+    return [(x, y), (x + width, y), (x + width, y + height), (x, y + height)]
+
+
+def generate_value(rule_val):
+    return [rule_val - step, rule_val, rule_val + step]
+
+
+def check_minimum_space(min_space, layer_name, num_layer, datatype):
+    lib = gdspy.GdsLibrary()
+    cell = lib.new_cell(layer_name + "_MIN_SPACE_TEST")
+
+    spaces = generate_value(min_space)
+    width = random.uniform(0.1, 0.5)
+    height = width
+
+    previous_x = base
+    for i, space in enumerate(spaces):
+        points1 = generate_polygon_points(previous_x, base, width, height)
+        polygon1 = gdspy.Polygon(points1, layer=num_layer, datatype=datatype)
+        cell.add(polygon1)
+
+        next_x = previous_x + width + space
+
+        points2 = generate_polygon_points(next_x, base, width, height)
+        polygon2 = gdspy.Polygon(points2, layer=num_layer, datatype=datatype)
+        cell.add(polygon2)
+
+        actual_space = points2[0][0] - points1[1][0]
+
+        if round(actual_space, 3) < min_space:
+            print(f"Test case {i + 1}: Space = {actual_space} (Fail)")
+        else:
+            print(f"Test case {i + 1}: Space = {actual_space} (Pass)")
+
+        previous_x = next_x + width + 0.5
+
+    lib.write_gds(layer_name + '_min_space_test.gds')
+    # gdspy.LayoutViewer()
