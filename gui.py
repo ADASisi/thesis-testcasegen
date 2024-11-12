@@ -30,7 +30,6 @@ class ComboBoxExample(QWidget):
         self.setLayout(layout)
         self.create_file_button.move(100, 50)
 
-
     def selection_changed(self):
         selected_text = self.select_rule.currentText()
         self.label.setText(f"Selected: {selected_text}")
