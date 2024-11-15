@@ -1,0 +1,20 @@
+|Polysilicon and Isolation Design Rules|50|-|RX minimum width|>=|0.08
+|Polysilicon and Isolation Design Rules|51|-|RX minimum area|>=|0.054
+|Polysilicon and Isolation Design Rules|52|-|RX minimum space|>=|0.11
+|PC Design Rules|100|-|PC minimum width|>=|0.06
+|PC Design Rules|101a|-|PC minimum area|>=|0.042
+|PC Design Rules|102|-|PC minimum space|>=|0.12
+|M1 and V1 Design Rules|500|-|M1 minimum width|>=|0.09
+|M1 and V1 Design Rules|500b|-|M1 maximum width|<=|12
+|M1 and V1 Design Rules|501|-|M1 minimum area|>=|0.2
+|M1 and V1 Design Rules|502|-|M1 minimum space|>=|0.09
+|Mx and Vx Design Rules|600_M2|-|M2 minimum width|>=|0.1
+|Mx and Vx Design Rules|600_M3|-|M3 minimum width|>=|0.1
+|Mx and Vx Design Rules|600_M4|-|M4 minimum width|>=|0.1
+
+
+
+
+
+
+
