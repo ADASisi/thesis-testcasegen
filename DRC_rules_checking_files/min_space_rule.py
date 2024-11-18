@@ -7,6 +7,13 @@ number_of_tests = 3
 base = 1
 
 
+def display_test_cases(i, actual_space, min_space):
+    if round(actual_space, 3) < min_space:
+        return f"Test case {i + 1}: Space = {actual_space} (Fail)"
+    else:
+        return f"Test case {i + 1}: Space = {actual_space} (Pass)"
+
+
 def check_minimum_space(min_space, layer_name, num_layer, datatype):
     lib = gdspy.GdsLibrary()
     cell = lib.new_cell(layer_name + "_MIN_SPACE_TEST")
@@ -15,6 +22,8 @@ def check_minimum_space(min_space, layer_name, num_layer, datatype):
     height = width
 
     previous_x = base
+    results = []
+
     for i, space in enumerate(spaces):
         points1 = basic_functions.generate_polygon_points(previous_x, base, width, height)
         polygon1 = gdspy.Polygon(points1, layer=num_layer, datatype=datatype)
@@ -28,12 +37,10 @@ def check_minimum_space(min_space, layer_name, num_layer, datatype):
 
         actual_space = points2[0][0] - points1[1][0]
 
-        if round(actual_space, 3) < min_space:
-            print(f"Test case {i + 1}: Space = {actual_space} (Fail)")
-        else:
-            print(f"Test case {i + 1}: Space = {actual_space} (Pass)")
+        results.append(display_test_cases(i, actual_space, min_space))
 
         previous_x = next_x + width + 0.5
 
     lib.write_gds(layer_name + '_min_space_test.gds')
-    # gdspy.LayoutViewer()
+    gdspy.LayoutViewer()
+    return results

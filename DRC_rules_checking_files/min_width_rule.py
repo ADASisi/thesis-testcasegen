@@ -7,11 +7,19 @@ number_of_tests = 3
 base = 1
 
 
+def display_test_cases(i, actual_width, min_width):
+    if round(actual_width, 3) < min_width:
+        return f"Test case {i + 1}: Space = {actual_width} (Fail)"
+    else:
+        return f"Test case {i + 1}: Space = {actual_width} (Pass)"
+
+
 def check_minimum_width(min_width, layer_name, num_layer, datatype):
     lib = gdspy.GdsLibrary()
     cell = lib.new_cell(layer_name + "_MIN_WIDTH_TEST")
 
     widths = basic_functions.generate_value(min_width)
+    results = []
 
     for i, width in enumerate(widths):
         height = random.uniform(1, 3)
@@ -22,9 +30,9 @@ def check_minimum_width(min_width, layer_name, num_layer, datatype):
         bounding_box = polygon.get_bounding_box()
         actual_width = bounding_box[1][0] - bounding_box[0][0]
 
-        if round(actual_width, 3) < min_width:
-            print(f"Test case {i + 1}: Width = {actual_width} (Fail)")
-        else:
-            print(f"Test case {i + 1}: Width = {actual_width} (Pass)")
+        results.append(display_test_cases(i, actual_width, min_width))
+
 
     lib.write_gds(layer_name + '_min_width_test.gds')
+    gdspy.LayoutViewer()
+    return results

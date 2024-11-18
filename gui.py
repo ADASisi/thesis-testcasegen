@@ -1,5 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QComboBox, QLabel, QVBoxLayout, QHBoxLayout, QWidget, QPushButton
-from PyQt5.QtGui import QPixmap, QImage
+from PyQt5.QtWidgets import QApplication, QComboBox, QLabel, QVBoxLayout, QHBoxLayout, QWidget, QPushButton, QTextEdit
 from PyQt5.QtCore import Qt
 import sys
 import get_rule
@@ -12,13 +11,13 @@ class ComboBoxExample(QWidget):
         self.select_rule.addItems(["50", "51", "52"])
 
         self.label = QLabel("Selected: None")
+        self.result_display = QTextEdit()
+        self.result_display.setReadOnly(True)
 
         self.display_button = QPushButton("&Display")
         self.create_file_button = QPushButton("&Export rule as a file")
 
         self.select_rule.currentIndexChanged.connect(self.selection_changed)
-
-        self.layout = QVBoxLayout()
 
         h_layout = QHBoxLayout()
         h_layout.addWidget(self.select_rule)
@@ -28,9 +27,11 @@ class ComboBoxExample(QWidget):
         layout = QVBoxLayout()
         layout.addLayout(h_layout)
         layout.addWidget(self.label)
+        layout.addWidget(self.result_display)
+
         self.setLayout(layout)
+
         self.display_button.clicked.connect(self.pressed_button_run_rule)
-        self.create_file_button.move(100, 50)
 
     def selection_changed(self):
         selected_rule_name = self.select_rule.currentText()
@@ -38,8 +39,11 @@ class ComboBoxExample(QWidget):
 
     def pressed_button_run_rule(self):
         selected_rule = self.select_rule.currentText()
-        get_rule.get_rule_name(selected_rule)
-
+        results = get_rule.get_rule_name(selected_rule)
+        if results:
+            self.result_display.setText("\n".join(results))
+        else:
+            self.result_display.setText("No results found.")
 
 app = QApplication(sys.argv)
 window = ComboBoxExample()

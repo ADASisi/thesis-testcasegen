@@ -31,18 +31,16 @@ def construct_function_name(parameter_1, parameter_2):
 
 def call_function_by_name(function_name, *args):
     if function_name in func:
-        func[function_name](*args)
+        return func[function_name](*args)
     else:
-        print(f"Function {function_name} not found or is not callable.")
+        return [f"Function {function_name} not found or is not callable."]
 
 
 def get_rule_name(rule_name):
     with open("65LPe_V1830.psv", "r") as fpsv:
         for line in fpsv:
             split_text = line.split("|")
-            # print(split_text)
             if split_text[2].strip() == rule_name:
-
                 rule_parameters = split_text[4].strip().split()
                 number = float(split_text[6].strip())
                 layer_name = rule_parameters[0]
@@ -55,6 +53,7 @@ def get_rule_name(rule_name):
                             number_layer = int(map_text[0])
                             number_datatype = int(map_text[1])
                 function_name = construct_function_name(parm_1, parm_2)
-                call_function_by_name(function_name,  number, layer_name, number_layer, number_datatype)
-                return
-    print("Rule number " + rule_name + " don't exist.")
+                results = call_function_by_name(function_name, number, layer_name, number_layer, number_datatype)
+                return results
+    return [f"Rule number {rule_name} doesn't exist."]
+
