@@ -10,7 +10,6 @@ base = 1
 def check_minimum_space(min_space, layer_name, num_layer, datatype):
     lib = gdspy.GdsLibrary()
     cell = lib.new_cell(layer_name + "_MIN_SPACE_TEST")
-
     spaces = basic_functions.generate_value(min_space)
     width = random.uniform(0.1, 0.5)
     height = width

@@ -7,7 +7,7 @@ sys.path.append(os.path.join(os.getcwd(), "DRC_rules_checking_files"))
 func = {}
 for file in os.listdir("DRC_rules_checking_files"):
     if file.endswith(".py") and file != "__init__.py":
-        module_name = file[:-3]  # Remove the .py extension
+        module_name = file[:-3]
         module = importlib.import_module(module_name)
         for attr in dir(module):
             if callable(getattr(module, attr)):
@@ -58,12 +58,3 @@ def get_rule_name(rule_name):
                 call_function_by_name(function_name,  number, layer_name, number_layer, number_datatype)
                 return
     print("Rule number " + rule_name + " don't exist.")
-
-
-while True:
-    answer = input("Do you want to continue:")
-    if answer.strip() == "yes":
-        rule_name = input("Enter name of rule:")
-        get_rule_name(rule_name)
-    else:
-        break
