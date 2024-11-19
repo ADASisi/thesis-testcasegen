@@ -9,9 +9,15 @@ base = 1
 
 def display_test_cases(i, actual_width, min_width):
     if round(actual_width, 3) < min_width:
-        return f"Test case {i + 1}: Space = {actual_width} (Fail)"
+        return f"Test case {i + 1}: Space = {round(actual_width, 3)} (Fail)"
     else:
-        return f"Test case {i + 1}: Space = {actual_width} (Pass)"
+        return f"Test case {i + 1}: Space = {round(actual_width, 3)} (Pass)"
+
+
+def export_file_minimum_width(lib, layer_name):
+    gds_filename = f"{layer_name}_min_width_test.gds"
+    lib.write_gds(gds_filename)
+    print(f"GDS file '{gds_filename}' has been created.")
 
 
 def check_minimum_width(min_width, layer_name, num_layer, datatype):
@@ -32,7 +38,7 @@ def check_minimum_width(min_width, layer_name, num_layer, datatype):
 
         results.append(display_test_cases(i, actual_width, min_width))
 
-
-    lib.write_gds(layer_name + '_min_width_test.gds')
+    # gds_filename = f"{layer_name}_min_width_test"
+    # lib.write_gds(gds_filename)
     gdspy.LayoutViewer()
-    return results
+    return results, lib

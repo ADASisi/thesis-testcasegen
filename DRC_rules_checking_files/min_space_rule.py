@@ -9,10 +9,14 @@ base = 1
 
 def display_test_cases(i, actual_space, min_space):
     if round(actual_space, 3) < min_space:
-        return f"Test case {i + 1}: Space = {actual_space} (Fail)"
+        return f"Test case {i + 1}: Space = {round(actual_space, 3)} (Fail)"
     else:
-        return f"Test case {i + 1}: Space = {actual_space} (Pass)"
+        return f"Test case {i + 1}: Space = {round(actual_space, 3)} (Pass)"
 
+
+def export_file_minimum_space(lib, layer_name):
+    gds_filename = f"{layer_name}_min_space_test.gds"
+    lib.write_gds(gds_filename)
 
 def check_minimum_space(min_space, layer_name, num_layer, datatype):
     lib = gdspy.GdsLibrary()
@@ -41,6 +45,8 @@ def check_minimum_space(min_space, layer_name, num_layer, datatype):
 
         previous_x = next_x + width + 0.5
 
-    lib.write_gds(layer_name + '_min_space_test.gds')
+
+    # gds_filename = f"{layer_name}_min_space_test.gds"
+    # lib.write_gds(gds_filename)
     gdspy.LayoutViewer()
-    return results
+    return results, lib

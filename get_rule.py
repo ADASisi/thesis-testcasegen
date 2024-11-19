@@ -36,6 +36,13 @@ def call_function_by_name(function_name, *args):
         return [f"Function {function_name} not found or is not callable."]
 
 
+def export_file(rule_name):
+    rule_data = rule_enforcement(rule_name)
+    # if isinstance(rule_data, str):
+    #     raise ValueError(rule_data)
+    results, layer_name, lib, parm_1, parm_2 = rule_data
+    call_function_by_name(f"export_file_{parm_1}_{parm_2}", lib, layer_name)
+
 def get_rule_name(rule_name):
     with open("65LPe_V1830.psv", "r") as fpsv:
         for line in fpsv:
@@ -52,8 +59,12 @@ def get_rule_name(rule_name):
                         if layer_name == map_text[2].strip():
                             number_layer = int(map_text[0])
                             number_datatype = int(map_text[1])
-                function_name = construct_function_name(parm_1, parm_2)
-                results = call_function_by_name(function_name, number, layer_name, number_layer, number_datatype)
-                return results
+                            return parm_1, parm_2, number, layer_name, number_layer, number_datatype
     return [f"Rule number {rule_name} doesn't exist."]
 
+
+def rule_enforcement(rule_name):
+    parm_1, parm_2, number, layer_name, number_layer, number_datatype = get_rule_name(rule_name)
+    function_name = construct_function_name(parm_1, parm_2)
+    results, lib = call_function_by_name(function_name, number, layer_name, number_layer, number_datatype)
+    return results, layer_name, lib, parm_1, parm_2
