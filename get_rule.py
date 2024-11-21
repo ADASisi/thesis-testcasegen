@@ -37,11 +37,13 @@ def call_function_by_name(function_name, *args):
 
 
 def export_file(rule_name):
-    rule_data = rule_enforcement(rule_name)
+    rule_data = get_rule_name(rule_name)
     # if isinstance(rule_data, str):
     #     raise ValueError(rule_data)
-    results, layer_name, lib, parm_1, parm_2 = rule_data
-    call_function_by_name(f"export_file_{parm_1}_{parm_2}", lib, layer_name)
+    parm_1, parm_2, number, layer_name, number_layer, number_datatype = rule_data
+    function_name = construct_function_name(parm_1, parm_2)
+    results, lib = call_function_by_name(function_name, number, layer_name, number_layer, number_datatype)
+    call_function_by_name(f"export_file_{rule_data[0]}_{rule_data[1]}", lib, layer_name)
 
 def get_rule_name(rule_name):
     with open("65LPe_V1830.psv", "r") as fpsv:
@@ -63,8 +65,9 @@ def get_rule_name(rule_name):
     return [f"Rule number {rule_name} doesn't exist."]
 
 
-def rule_enforcement(rule_name):
+def rule_displaying(rule_name):
     parm_1, parm_2, number, layer_name, number_layer, number_datatype = get_rule_name(rule_name)
     function_name = construct_function_name(parm_1, parm_2)
     results, lib = call_function_by_name(function_name, number, layer_name, number_layer, number_datatype)
+    call_function_by_name(f"display_file_{parm_1}_{parm_2}")
     return results, layer_name, lib, parm_1, parm_2

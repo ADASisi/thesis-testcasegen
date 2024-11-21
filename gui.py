@@ -40,7 +40,7 @@ class ComboBoxExample(QWidget):
 
     def pressed_button_run_rule(self):
         selected_rule = self.select_rule.currentText()
-        results = get_rule.rule_enforcement(selected_rule)
+        results = get_rule.rule_displaying(selected_rule)
         if results:
             self.result_display.setText("\n".join(results[0]))
         else:

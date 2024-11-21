@@ -20,9 +20,15 @@ def export_file_minimum_width(lib, layer_name):
     print(f"GDS file '{gds_filename}' has been created.")
 
 
+def display_file_minimum_width():
+    gdspy.LayoutViewer()
+
+
 def check_minimum_width(min_width, layer_name, num_layer, datatype):
     lib = gdspy.GdsLibrary()
-    cell = lib.new_cell(layer_name + "_MIN_WIDTH_TEST")
+    cell_name = f"{layer_name}_MIN_WIDTH_TEST_{random.uniform(1,100)}"
+
+    cell = lib.new_cell(cell_name)
 
     widths = basic_functions.generate_value(min_width)
     results = []
@@ -40,5 +46,5 @@ def check_minimum_width(min_width, layer_name, num_layer, datatype):
 
     # gds_filename = f"{layer_name}_min_width_test"
     # lib.write_gds(gds_filename)
-    gdspy.LayoutViewer()
+    # gdspy.LayoutViewer()
     return results, lib
