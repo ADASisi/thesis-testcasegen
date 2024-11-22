@@ -45,6 +45,7 @@ def export_file(rule_name):
     results, lib = call_function_by_name(function_name, number, layer_name, number_layer, number_datatype)
     call_function_by_name(f"export_file_{rule_data[0]}_{rule_data[1]}", lib, layer_name)
 
+
 def get_rule_name(rule_name):
     with open("65LPe_V1830.psv", "r") as fpsv:
         for line in fpsv:
