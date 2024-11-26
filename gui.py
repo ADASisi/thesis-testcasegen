@@ -1,6 +1,9 @@
 from PyQt5.QtWidgets import QApplication, QComboBox, QLabel, QVBoxLayout, QHBoxLayout, QWidget, QPushButton, QTextEdit
+import os
 import sys
+import glob
 import get_rule
+import dropdown_menu_options
 
 
 class ComboBoxExample(QWidget):
@@ -10,8 +13,11 @@ class ComboBoxExample(QWidget):
         self.select_rule = QComboBox()
 
         self.select_rule.addItem("Please select a rule")
-        self.select_rule.addItems(["50", "51", "52"])
         self.select_rule.setItemData(0, False)
+
+        rules = dropdown_menu_options.get_rules_name()
+        for rule in rules:
+            self.select_rule.addItem(rule)
 
         self.label = QLabel("Selected: None")
         self.result_display = QTextEdit()
@@ -41,7 +47,8 @@ class ComboBoxExample(QWidget):
         if selected_rule_name == "Please select a rule":
             self.label.setText("Selected: None")
         else:
-            self.label.setText(f"Selected: {selected_rule_name}")
+            description_rule = dropdown_menu_options.show_rule_description(selected_rule_name)
+            self.label.setText(f"Selected: {description_rule}")
 
     def pressed_button_run_rule(self):
         selected_rule = self.select_rule.currentText()
@@ -66,6 +73,13 @@ class ComboBoxExample(QWidget):
             self.result_display.setText(f"Export failed: {str(e)}")
 
 
+def delete_gds_files():
+    gds_files = glob.glob("*.gds")
+    for file in gds_files:
+        os.remove(file)
+
+
+delete_gds_files()
 app = QApplication(sys.argv)
 window = ComboBoxExample()
 window.show()
