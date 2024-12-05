@@ -20,9 +20,7 @@ def export_file_minimum_space(lib, layer_name):
 
 
 def display_file_minimum_space():
-    # results, lib = check_minimum_space(min_space, layer_name, num_layer, datatype)
     gdspy.LayoutViewer()
-    # return results, lib
 
 
 def cell_exists(library, name):
@@ -59,7 +57,7 @@ def check_minimum_space(min_space, layer_name, num_layer, datatype):
 
         results.append(display_test_cases(i, actual_space, min_space))
 
-        previous_x = next_x + width + 0.5
+        previous_x = next_x + width + min_space
 
     # gds_filename = f"{layer_name}_min_space_test.gds"
     # lib.write_gds(gds_filename)
