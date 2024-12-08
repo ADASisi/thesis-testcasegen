@@ -19,8 +19,8 @@ def export_file_maximum_width(lib, layer_name):
     lib.write_gds(gds_filename)
 
 
-def display_file_maximum_width():
-    gdspy.LayoutViewer()
+def display_file_maximum_width(cell):
+    gdspy.LayoutViewer(cells=cell)
 
 
 def check_maximum_width(max_width, layer_name, num_layer, datatype):
@@ -43,4 +43,4 @@ def check_maximum_width(max_width, layer_name, num_layer, datatype):
 
         results.append(display_test_cases(i, actual_width, max_width))
 
-    return results, lib
+    return results, lib, cell
