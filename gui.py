@@ -3,7 +3,7 @@ import os
 import sys
 import glob
 import get_rule
-import dropdown_menu_options
+import dropdown_menu_functions
 
 
 class ComboBoxExample(QWidget):
@@ -15,7 +15,7 @@ class ComboBoxExample(QWidget):
         self.select_rule.addItem("Please select a rule")
         self.select_rule.setItemData(0, False)
 
-        rules = dropdown_menu_options.get_rules_name()
+        rules = dropdown_menu_functions.get_rules_name()
         for rule in rules:
             self.select_rule.addItem(rule)
 
@@ -47,7 +47,7 @@ class ComboBoxExample(QWidget):
         if selected_rule_name == "Please select a rule":
             self.label.setText("Selected: None")
         else:
-            description_rule = dropdown_menu_options.show_rule_description(selected_rule_name)
+            description_rule = dropdown_menu_functions.show_rule_description(selected_rule_name)
             self.label.setText(f"Selected: {description_rule}")
 
     def pressed_button_run_rule(self):

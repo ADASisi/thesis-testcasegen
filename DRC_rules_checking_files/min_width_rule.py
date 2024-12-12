@@ -6,6 +6,10 @@ number_of_tests = 3
 
 base = 1
 
+lib = gdspy.GdsLibrary()
+
+results = []
+
 
 def display_test_cases(i, actual_width, min_width):
     if round(actual_width, 3) < min_width:
@@ -25,26 +29,22 @@ def display_file_minimum_width(cell):
 
 
 def check_minimum_width(min_width, layer_name, num_layer, datatype):
-    lib = gdspy.GdsLibrary()
-    cell_name = f"{layer_name}_MIN_WIDTH_TEST_{random.uniform(1,100)}"
+    global cell
+    cell_name = f"{layer_name}_MIN_WIDTH_TEST"
+    if basic_functions.cell_exists(lib, cell_name) is False:
+        cell = lib.new_cell(cell_name)
 
-    cell = lib.new_cell(cell_name)
+        widths = basic_functions.generate_value(min_width)
 
-    widths = basic_functions.generate_value(min_width)
-    results = []
+        for i, width in enumerate(widths):
+            height = random.uniform(1, 3)
+            points = basic_functions.generate_polygon_points(base + i * 0.2, base, width, height)
+            polygon = gdspy.Polygon(points, layer=num_layer, datatype=datatype)
+            cell.add(polygon)
 
-    for i, width in enumerate(widths):
-        height = random.uniform(1, 3)
-        points = basic_functions.generate_polygon_points(base + i * 0.2, base, width, height)
-        polygon = gdspy.Polygon(points, layer=num_layer, datatype=datatype)
-        cell.add(polygon)
+            bounding_box = polygon.get_bounding_box()
+            actual_width = bounding_box[1][0] - bounding_box[0][0]
 
-        bounding_box = polygon.get_bounding_box()
-        actual_width = bounding_box[1][0] - bounding_box[0][0]
+            results.append(display_test_cases(i, actual_width, min_width))
 
-        results.append(display_test_cases(i, actual_width, min_width))
-
-    # gds_filename = f"{layer_name}_min_width_test"
-    # lib.write_gds(gds_filename)
-    # gdspy.LayoutViewer()
     return results, lib, cell

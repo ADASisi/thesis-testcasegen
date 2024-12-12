@@ -6,6 +6,10 @@ number_of_tests = 3
 
 base = 1
 
+lib = gdspy.GdsLibrary()
+
+results = []
+
 
 def display_test_cases(i, actual_space, min_space):
     if round(actual_space, 3) < min_space:
@@ -23,40 +27,32 @@ def display_file_minimum_space(cell):
     gdspy.LayoutViewer(cells=cell)
 
 
-def cell_exists(library, name):
-    return name in library.cells
-
-
 def check_minimum_space(min_space, layer_name, num_layer, datatype):
-    lib = gdspy.GdsLibrary()
-    cell_name = f"{layer_name}_MIN_SPACE_TEST_{random.uniform(1,100)}"
-    # if cell_name in GdsLibrary:
-    #     cell = lib.cells[cell_name]
-    # else:
-    #     cell = lib.new_cell(cell_name)
-    cell = lib.new_cell(cell_name)
-    spaces = basic_functions.generate_value(min_space)
-    width = random.uniform(0.1, 0.5)
-    height = width
+    global cell
+    cell_name = f"{layer_name}_MIN_SPACE_TEST"
+    if basic_functions.cell_exists(lib, cell_name) is False:
+        cell = lib.new_cell(cell_name)
+        spaces = basic_functions.generate_value(min_space)
+        width = random.uniform(0.1, 0.5)
+        height = width
 
-    previous_x = base
-    results = []
+        previous_x = base
 
-    for i, space in enumerate(spaces):
-        points1 = basic_functions.generate_polygon_points(previous_x, base, width, height)
-        polygon1 = gdspy.Polygon(points1, layer=num_layer, datatype=datatype)
-        cell.add(polygon1)
+        for i, space in enumerate(spaces):
+            points1 = basic_functions.generate_polygon_points(previous_x, base, width, height)
+            polygon1 = gdspy.Polygon(points1, layer=num_layer, datatype=datatype)
+            cell.add(polygon1)
 
-        next_x = previous_x + width + space
+            next_x = previous_x + width + space
 
-        points2 = basic_functions.generate_polygon_points(next_x, base, width, height)
-        polygon2 = gdspy.Polygon(points2, layer=num_layer, datatype=datatype)
-        cell.add(polygon2)
+            points2 = basic_functions.generate_polygon_points(next_x, base, width, height)
+            polygon2 = gdspy.Polygon(points2, layer=num_layer, datatype=datatype)
+            cell.add(polygon2)
 
-        actual_space = points2[0][0] - points1[1][0]
+            actual_space = points2[0][0] - points1[1][0]
 
-        results.append(display_test_cases(i, actual_space, min_space))
+            results.append(display_test_cases(i, actual_space, min_space))
 
-        previous_x = next_x + width + min_space
+            previous_x = next_x + width + min_space
 
     return results, lib, cell
