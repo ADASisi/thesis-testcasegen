@@ -26,6 +26,8 @@ def construct_function_name(parameter_1, parameter_2):
         func_name = func_name + "area"
     elif parameter_2 == "space":
         func_name = func_name + "space"
+    elif parameter_2 == "enclosure":
+        func_name = func_name + "enclosure"
     return func_name
 
 
@@ -47,7 +49,7 @@ def export_file(rule_name):
 
 
 def get_rule_name(rule_name):
-    with open("65LPe_V1830.psv", "r") as fpsv:
+    with open("Resources/65LPe_V1830.psv", "r") as fpsv:
         for line in fpsv:
             split_text = line.split("|")
             if split_text[2].strip() == rule_name:
@@ -56,7 +58,7 @@ def get_rule_name(rule_name):
                 layer_name = rule_parameters[0]
                 parm_1 = rule_parameters[1]
                 parm_2 = rule_parameters[2]
-                with open("65LPe.map", "r") as fmap:
+                with open("Resources/65LPe.map", "r") as fmap:
                     for map_line in fmap:
                         map_text = map_line.split()
                         if layer_name == map_text[2].strip():

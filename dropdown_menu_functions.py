@@ -1,6 +1,6 @@
 def get_rules_name():
     options_dropdown_menu = []
-    with open("65LPe_V1830.psv", "r") as fpsv:
+    with open("Resources/65LPe_V1830.psv", "r") as fpsv:
         for line in fpsv:
             split_text = line.strip().split("|")
             if len(split_text) > 2:
@@ -10,7 +10,7 @@ def get_rules_name():
 
 def show_rule_description(rule_name):
     description_rule = ""
-    with open("65LPe_V1830.psv", "r") as fpsv:
+    with open("Resources/65LPe_V1830.psv", "r") as fpsv:
         for line in fpsv:
             split_text = line.split("|")
             if split_text[2].strip() == rule_name:
