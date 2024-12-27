@@ -1,10 +1,5 @@
-import random
 import gdspy
 import basic_functions
-
-number_of_tests = 3
-
-base = 1
 
 lib = gdspy.GdsLibrary()
 
@@ -38,7 +33,7 @@ def check_maximum_width(max_width, layer_name, num_layer, datatype):
 
         for i, width in enumerate(widths):
             height = 7 #da go izmislq
-            points = basic_functions.generate_polygon_points(base, base + i * width, width, height)
+            points = basic_functions.generate_polygon_points(basic_functions.base, basic_functions.base + i * width, width, height)
             polygon = gdspy.Polygon(points, layer=num_layer, datatype=datatype)
             cell.add(polygon)
 

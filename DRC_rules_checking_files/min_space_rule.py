@@ -2,10 +2,6 @@ import gdspy
 import random
 import basic_functions
 
-number_of_tests = 3
-
-base = 1
-
 lib = gdspy.GdsLibrary()
 
 results = []
@@ -39,13 +35,13 @@ def check_minimum_space(min_space, layer_name, num_layer, datatype):
         previous_x = base
 
         for i, space in enumerate(spaces):
-            points1 = basic_functions.generate_polygon_points(previous_x, base, width, height)
+            points1 = basic_functions.generate_polygon_points(previous_x, basic_functions.base, width, height)
             polygon1 = gdspy.Polygon(points1, layer=num_layer, datatype=datatype)
             cell.add(polygon1)
 
             next_x = previous_x + width + space
 
-            points2 = basic_functions.generate_polygon_points(next_x, base, width, height)
+            points2 = basic_functions.generate_polygon_points(next_x, basic_functions.base, width, height)
             polygon2 = gdspy.Polygon(points2, layer=num_layer, datatype=datatype)
             cell.add(polygon2)
 

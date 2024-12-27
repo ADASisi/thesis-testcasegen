@@ -2,10 +2,6 @@ import gdspy
 import random
 import basic_functions
 
-number_of_tests = 3
-
-base = 1
-
 lib = gdspy.GdsLibrary()
 
 results = []
@@ -38,7 +34,7 @@ def check_minimum_width(min_width, layer_name, num_layer, datatype):
 
         for i, width in enumerate(widths):
             height = random.uniform(1, 3)
-            points = basic_functions.generate_polygon_points(base + i * 0.2, base, width, height)
+            points = basic_functions.generate_polygon_points(basic_functions.base + i * 0.2, basic_functions.base, width, height)
             polygon = gdspy.Polygon(points, layer=num_layer, datatype=datatype)
             cell.add(polygon)
 

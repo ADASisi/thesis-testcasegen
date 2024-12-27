@@ -2,10 +2,6 @@ import gdspy
 import random
 import basic_functions
 
-number_of_tests = 3
-
-base = 1
-
 lib = gdspy.GdsLibrary()
 
 results = []
@@ -38,7 +34,7 @@ def check_minimum_area(min_area, layer_name, num_layer, datatype):
         for i, area in enumerate(areas):
             width = random.uniform(0.08, 0.1)
             height = area / width
-            points = basic_functions.generate_polygon_points(base + i * 0.2, base, width, height)
+            points = basic_functions.generate_polygon_points(basic_functions.base + i * 0.2, basic_functions.base, width, height)
             polygon = gdspy.Polygon(points, layer=num_layer, datatype=datatype)
             cell.add(polygon)
             actual_area = width * height

@@ -1,10 +1,6 @@
 import gdspy
 import basic_functions
 
-number_of_tests = 3
-
-base = 1
-
 lib = gdspy.GdsLibrary()
 
 results = []
@@ -36,19 +32,19 @@ def check_min_enclosure_rule(min_enclosure, layer_name, num_layer, datatype):
         width = 0.08
         enclosure_areas = basic_functions.generate_value(min_enclosure)
 
-        previous_x = base
+        previous_x = basic_functions.base
 
         for i, enclosure_area in enumerate(enclosure_areas):
             x_offset = previous_x + i * 0.2
 
-            points_polygon_1 = basic_functions.generate_polygon_points(x_offset, base, width, height)
+            points_polygon_1 = basic_functions.generate_polygon_points(x_offset, basic_functions.base, width, height)
             polygon_1 = gdspy.Polygon(points_polygon_1, layer=num_layer, datatype=datatype)
             cell.add(polygon_1)
 
             next_x = x_offset + enclosure_area
 
             points_polygon_2 = basic_functions.generate_polygon_points(
-                next_x, base + enclosure_area, width - 2 * enclosure_area, height - 2 * enclosure_area
+                next_x, basic_functions.base + enclosure_area, width - 2 * enclosure_area, height - 2 * enclosure_area
             )
             polygon_2 = gdspy.Polygon(points_polygon_2, layer=num_layer, datatype=datatype)
             cell.add(polygon_2)
