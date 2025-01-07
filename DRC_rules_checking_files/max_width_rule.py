@@ -7,7 +7,7 @@ results = []
 
 
 def display_test_cases(i, actual_width, max_width):
-    if round(actual_width, 3) < max_width:
+    if round(actual_width, 3) > max_width:
         return f"Test case {i + 1}: Width = {round(actual_width, 3)} (Fail)"
     else:
         return f"Test case {i + 1}: Width = {round(actual_width, 3)} (Pass)"
