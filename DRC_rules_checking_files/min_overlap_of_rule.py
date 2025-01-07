@@ -13,16 +13,16 @@ def display_test_cases(i, actual_overlap, min_overlap):
         return f"Test case {i + 1}: Overlap = {round(actual_overlap, 3)} (Pass)"
 
 
-def export_file_minimum_overlapof(lib, layer_name):
+def export_file_minimum_overlap_of(lib, layer_name):
     gds_filename = f"min_overlap_of_{layer_name}_test.gds"
     lib.write_gds(gds_filename)
 
 
-def display_file_minimum_overlapof(cell):
+def display_file_minimum_overlap_of(cell):
     gdspy.LayoutViewer(cells=cell)
 
 
-def check_min_overlapof_rule(min_overlap, layer_name, num_layer, datatype):
+def check_min_overlap_of_rule(min_overlap, layer_name, num_layer, datatype):
     global cell
     cell_name = f"MIN_OVERLAP_OF_{layer_name}_TEST"
     if basic_functions.cell_exists(lib, cell_name) is False:
