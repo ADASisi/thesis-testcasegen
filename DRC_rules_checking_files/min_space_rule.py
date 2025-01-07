@@ -32,7 +32,7 @@ def check_minimum_space(min_space, layer_name, num_layer, datatype):
         width = random.uniform(0.1, 0.5)
         height = width
 
-        previous_x = base
+        previous_x = basic_functions.base
 
         for i, space in enumerate(spaces):
             points1 = basic_functions.generate_polygon_points(previous_x, basic_functions.base, width, height)

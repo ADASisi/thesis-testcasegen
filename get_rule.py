@@ -39,16 +39,14 @@ def call_function_by_name(function_name, *args):
 
 
 def export_file(rule_name):
-    rule_data = get_rule_name(rule_name)
-    # if isinstance(rule_data, str):
-    #     raise ValueError(rule_data)
+    rule_data = get_rule_parameters(rule_name)
     parm_1, parm_2, number, layer_name, number_layer, number_datatype = rule_data
     function_name = construct_function_name(parm_1, parm_2)
     results, lib, cell = call_function_by_name(function_name, number, layer_name, number_layer, number_datatype)
     call_function_by_name(f"export_file_{rule_data[0]}_{rule_data[1]}", lib, layer_name)
 
 
-def get_rule_name(rule_name):
+def get_rule_parameters(rule_name):
     with open("Resources/65LPe_V1830.psv", "r") as fpsv:
         for line in fpsv:
             split_text = line.split("|")
@@ -69,7 +67,7 @@ def get_rule_name(rule_name):
 
 
 def rule_displaying(rule_name):
-    parm_1, parm_2, number, layer_name, number_layer, number_datatype = get_rule_name(rule_name)
+    parm_1, parm_2, number, layer_name, number_layer, number_datatype = get_rule_parameters(rule_name)
     function_name = construct_function_name(parm_1, parm_2)
     results, lib, cell = call_function_by_name(function_name, number, layer_name, number_layer, number_datatype)
     call_function_by_name(f"display_file_{parm_1}_{parm_2}", cell)
