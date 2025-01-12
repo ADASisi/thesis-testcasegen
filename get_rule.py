@@ -30,6 +30,8 @@ def construct_function_name(parameter_1, parameter_2):
         func_name = func_name + "enclosure"
     elif parameter_2 == "overlap-of":
         func_name = func_name + "overlap_of"
+    elif parameter_2 == "overlap-past":
+        func_name = func_name + "overlap_past"
     return func_name
 
 

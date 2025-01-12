@@ -22,9 +22,9 @@ def display_file_minimum_overlap_of(cell):
     gdspy.LayoutViewer(cells=cell)
 
 
-def check_min_overlap_of_rule(min_overlap, layer_name, num_layer, datatype):
+def check_min_overlap_of(min_overlap, first_layer_name, second_layer_name, num_first_layer, num_second_layer, datatype):
     global cell
-    cell_name = f"MIN_OVERLAP_OF_{layer_name}_TEST"
+    cell_name = f"MIN_{first_layer_name}_OVERLAP_OF_{second_layer_name}_TEST"
     if basic_functions.cell_exists(lib, cell_name) is False:
         cell = lib.new_cell(cell_name)
         height = 0.08
@@ -39,7 +39,7 @@ def check_min_overlap_of_rule(min_overlap, layer_name, num_layer, datatype):
             big_polygon_points = basic_functions.generate_polygon_points(
                 x_offset, basic_functions.base, width, height
             )
-            polygon_1 = gdspy.Polygon(big_polygon_points, layer=num_layer, datatype=datatype)
+            polygon_1 = gdspy.Polygon(big_polygon_points, layer=num_first_layer, datatype=datatype)
             cell.add(polygon_1)
 
             next_x = x_offset - overlap
@@ -47,11 +47,14 @@ def check_min_overlap_of_rule(min_overlap, layer_name, num_layer, datatype):
             small_polygon_points = basic_functions.generate_polygon_points(
                 next_x, basic_functions.base + overlap / 2,  overlap * 2, height - overlap
             )
-            polygon_2 = gdspy.Polygon(small_polygon_points, layer=num_layer, datatype=datatype)
+            polygon_2 = gdspy.Polygon(small_polygon_points, layer=num_second_layer, datatype=datatype)
             cell.add(polygon_2)
 
             actual_overlap = small_polygon_points[1][0] - big_polygon_points[0][0]
 
             results.append(display_test_cases(i, actual_overlap, min_overlap))
 
-    return results, lib, cell
+    # return results, lib, cell
+    gdspy.LayoutViewer()
+
+check_min_overlap_of(0.02, "K", "J", 1, 2, 3, )
