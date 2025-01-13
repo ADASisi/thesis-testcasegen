@@ -59,7 +59,7 @@ class ComboBoxExample(QWidget):
             results = get_rule.rule_displaying(selected_rule)
             self.result_display.setText("\n".join(results[0]))
         except Exception as e:
-            self.result_display.setText("No result found")
+            self.result_display.setText("No result found.")
 
     def pressed_button_export_file(self):
         selected_rule_name = self.select_rule.currentText()
