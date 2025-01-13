@@ -13,8 +13,8 @@ def display_test_cases(i, actual_overlap, min_overlap):
         return f"Test case {i + 1}: Overlap = {round(actual_overlap, 3)} (Pass)"
 
 
-def export_file_minimum_overlap_of(lib, layer_name):
-    gds_filename = f"min_overlap_of_{layer_name}_test.gds"
+def export_file_minimum_overlap_of(lib, first_layer_name, second_layer_name):
+    gds_filename = f"min_{first_layer_name}_overlap_of_{second_layer_name}_test.gds"
     lib.write_gds(gds_filename)
 
 
