@@ -13,3 +13,13 @@ def generate_value(rule_val):
 
 def cell_exists(library, name):
     return name in library.cells
+
+def get_layer_other_parameters(layer_name, type_rule, rule_value):
+    layer_specifications = {'width': None, 'area': None, 'space': None, type_rule: rule_value}
+    with open("Resources/65LPe_V1830.psv", "r") as fpsv:
+        for line in fpsv:
+            split_text = line.split("|")
+            rule_parameters = split_text[4].strip().split()
+            if layer_name == rule_parameters[0] and rule_parameters[2] != type_rule:
+                layer_specifications[rule_parameters[2]] = float(split_text[6].strip())
+    return layer_specifications
