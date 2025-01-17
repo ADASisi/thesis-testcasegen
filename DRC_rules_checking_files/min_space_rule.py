@@ -29,7 +29,8 @@ def check_minimum_space(min_space, layer_name, num_layer, datatype):
     if basic_functions.cell_exists(lib, cell_name) is False:
         cell = lib.new_cell(cell_name)
         spaces = basic_functions.generate_value(min_space)
-        width = random.uniform(0.1, 0.5)
+        layer_specifications = basic_functions.get_layer_other_parameters(layer_name)
+        width = layer_specifications["width"]
         height = width
 
         previous_x = basic_functions.base

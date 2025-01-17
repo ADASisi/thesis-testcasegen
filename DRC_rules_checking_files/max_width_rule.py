@@ -32,6 +32,10 @@ def check_maximum_width(max_width, layer_name, num_layer, datatype):
         widths = basic_functions.generate_value(max_width)
 
         for i, width in enumerate(widths):
+
+            # layer_specifications = basic_functions.get_layer_other_parameters(layer_name)
+            # height = layer_specifications["area"] / width
+
             height = 7 #da go izmislq
             points = basic_functions.generate_polygon_points(basic_functions.base, basic_functions.base + i * width, width, height)
             polygon = gdspy.Polygon(points, layer=num_layer, datatype=datatype)

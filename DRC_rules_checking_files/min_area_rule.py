@@ -32,7 +32,9 @@ def check_minimum_area(min_area, layer_name, num_layer, datatype):
         areas = basic_functions.generate_value(min_area)
 
         for i, area in enumerate(areas):
-            width = random.uniform(0.08, 0.1)
+            layer_specifications = basic_functions.get_layer_other_parameters(layer_name)
+            width = layer_specifications["width"]
+            # width = random.uniform(0.08, 0.1)
             height = area / width
             points = basic_functions.generate_polygon_points(basic_functions.base + i * 0.2, basic_functions.base, width, height)
             polygon = gdspy.Polygon(points, layer=num_layer, datatype=datatype)

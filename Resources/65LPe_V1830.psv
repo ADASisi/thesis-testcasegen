@@ -11,5 +11,9 @@
 |Mx and Vx Design Rules|600_M2|-|M2 minimum width|>=|0.1
 |Mx and Vx Design Rules|600_M3|-|M3 minimum width|>=|0.1
 |Mx and Vx Design Rules|600_M4|-|M4 minimum width|>=|0.1
+|Alternative Triple-Well and Latchup Design Rules|3T02|-|T3 minimum width|>=|3
+|Alternative Triple-Well and Latchup Design Rules|3T03|-|T3 minimum space|>=|3.5
+|Alternative Triple-Well and Latchup Design Rules|SR250|-|NW minimum width|>=|0.4
+|Alternative Triple-Well and Latchup Design Rules|SR252c|-|NW minimum space|>=|0.64
 |Alternative Triple-Well and Latchup Design Rules|3T05a|-|NW minimum overlap past T3|>=|1
 |Alternative Triple-Well and Latchup Design Rules|3T05b|-|T3 minimum overlap of NW|>=|0.4

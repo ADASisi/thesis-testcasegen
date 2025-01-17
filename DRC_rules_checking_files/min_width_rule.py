@@ -9,9 +9,9 @@ results = []
 
 def display_test_cases(i, actual_width, min_width):
     if round(actual_width, 3) < min_width:
-        return f"Test case {i + 1}: Space = {round(actual_width, 3)} (Fail)"
+        return f"Test case {i + 1}: Width = {round(actual_width, 3)} (Fail)"
     else:
-        return f"Test case {i + 1}: Space = {round(actual_width, 3)} (Pass)"
+        return f"Test case {i + 1}: Width = {round(actual_width, 3)} (Pass)"
 
 
 def export_file_minimum_width(lib, layer_name):
@@ -33,8 +33,17 @@ def check_minimum_width(min_width, layer_name, num_layer, datatype):
         widths = basic_functions.generate_value(min_width)
 
         for i, width in enumerate(widths):
-            height = random.uniform(1, 3)
-            points = basic_functions.generate_polygon_points(basic_functions.base + i * 0.2, basic_functions.base, width, height)
+            layer_specifications = basic_functions.get_layer_other_parameters(layer_name)
+            if layer_specifications["area"] is not None:
+                height = layer_specifications["area"] / width
+            else:
+                height = width
+            # if layer_specifications["space"] is not None:
+            #     points = basic_functions.generate_polygon_points(
+            #         basic_functions.base + layer_specifications["space"] + i * width, basic_functions.base, width, height)
+            # else:
+            points = basic_functions.generate_polygon_points(basic_functions.base + i * width * 2, basic_functions.base,
+                                                                 width, height)
             polygon = gdspy.Polygon(points, layer=num_layer, datatype=datatype)
             cell.add(polygon)
 
@@ -44,3 +53,6 @@ def check_minimum_width(min_width, layer_name, num_layer, datatype):
             results.append(display_test_cases(i, actual_width, min_width))
 
     return results, lib, cell
+    # gdspy.LayoutViewer()
+
+# check_minimum_width(0.1, "M2", 1, 2)

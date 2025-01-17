@@ -27,17 +27,23 @@ def check_minimum_overlap_past(min_overlap, inside_layer_name, outside_layer_nam
     cell_name = f"MIN_{inside_layer_name}_OVERLAP_PAST_{outside_layer_name}_TEST"
     if basic_functions.cell_exists(lib, cell_name) is False:
         cell = lib.new_cell(cell_name)
-        height = 8
-        width = 4
+
+        outside_layer_specifications = basic_functions.get_layer_other_parameters(outside_layer_name)
+        big_width = outside_layer_specifications["width"]
+        if outside_layer_specifications["area"] is not None:
+            big_height = outside_layer_specifications["area"] / big_width
+        else:
+            big_height = big_width / 2
+
         overlaps = basic_functions.generate_value(min_overlap)
 
         previous_x = basic_functions.base
 
         for i, overlap in enumerate(overlaps):
-            x_offset = previous_x + i * 10 + overlap
+            x_offset = previous_x + i * outside_layer_specifications["space"] * 2
 
             small_polygon_points = basic_functions.generate_polygon_points(
-                x_offset, basic_functions.base + overlap / 2, width - overlap / 2, height - overlap
+                x_offset, basic_functions.base + overlap / 2, big_width - overlap / 2, big_height - overlap
             )
             polygon_1 = gdspy.Polygon(small_polygon_points, layer=num_outside_layer, datatype=outside_datatype)
             cell.add(polygon_1)
@@ -45,7 +51,7 @@ def check_minimum_overlap_past(min_overlap, inside_layer_name, outside_layer_nam
             next_x = x_offset - overlap
 
             big_polygon_points = basic_functions.generate_polygon_points(
-                next_x, basic_functions.base, width, height
+                next_x, basic_functions.base, big_width, big_height
             )
             polygon_2 = gdspy.Polygon(big_polygon_points, layer=num_inside_layer, datatype=inside_datatype)
             cell.add(polygon_2)
