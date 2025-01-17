@@ -13,7 +13,7 @@ def display_test_cases(i, actual_enclosure, min_enclosure):
         return f"Test case {i + 1}: Enclosure area = {round(actual_enclosure, 3)} (Pass)"
 
 
-def export_file_minimum_width(lib, first_layer_name, second_layer_name):
+def export_file_minimum_enclosure(lib, first_layer_name, second_layer_name):
     gds_filename = f"{first_layer_name}_min_enclosure_{second_layer_name}_test.gds"
     lib.write_gds(gds_filename)
     print(f"GDS file '{gds_filename}' has been created.")
