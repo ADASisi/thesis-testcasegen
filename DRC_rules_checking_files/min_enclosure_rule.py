@@ -13,8 +13,8 @@ def display_test_cases(i, actual_enclosure, min_enclosure):
         return f"Test case {i + 1}: Enclosure area = {round(actual_enclosure, 3)} (Pass)"
 
 
-def export_file_minimum_width(lib, layer_name):
-    gds_filename = f"{layer_name}_min_enclosure_test.gds"
+def export_file_minimum_width(lib, first_layer_name, second_layer_name):
+    gds_filename = f"{first_layer_name}_min_enclosure_{second_layer_name}_test.gds"
     lib.write_gds(gds_filename)
     print(f"GDS file '{gds_filename}' has been created.")
 
@@ -23,13 +23,15 @@ def display_file_minimum_enclosure(cell):
     gdspy.LayoutViewer(cells=cell)
 
 
-def check_min_enclosure_rule(min_enclosure, layer_name, num_layer, datatype):
+def check_minimum_enclosure(min_enclosure, first_layer_name, second_layer_name, num_first_layer, num_second_layer,
+                             first_datatype, second_datatype):
     global cell
-    cell_name = f"{layer_name}_MIN_ENCLOSURE_TEST"
+    cell_name = f"{first_layer_name}_MIN_ENCLOSURE_{second_layer_name}_TEST"
     if basic_functions.cell_exists(lib, cell_name) is False:
         cell = lib.new_cell(cell_name)
-        height = 0.08
-        width = 0.08
+        second_layer_specifications = basic_functions.get_layer_other_parameters(second_layer_name)
+        width = second_layer_specifications["width"]
+        height = width
         enclosure_areas = basic_functions.generate_value(min_enclosure)
 
         previous_x = basic_functions.base
@@ -38,7 +40,7 @@ def check_min_enclosure_rule(min_enclosure, layer_name, num_layer, datatype):
             x_offset = previous_x + i * 0.2
 
             points_polygon_1 = basic_functions.generate_polygon_points(x_offset, basic_functions.base, width, height)
-            polygon_1 = gdspy.Polygon(points_polygon_1, layer=num_layer, datatype=datatype)
+            polygon_1 = gdspy.Polygon(points_polygon_1, layer=num_first_layer, datatype=first_datatype)
             cell.add(polygon_1)
 
             next_x = x_offset + enclosure_area
@@ -46,7 +48,7 @@ def check_min_enclosure_rule(min_enclosure, layer_name, num_layer, datatype):
             points_polygon_2 = basic_functions.generate_polygon_points(
                 next_x, basic_functions.base + enclosure_area, width - 2 * enclosure_area, height - 2 * enclosure_area
             )
-            polygon_2 = gdspy.Polygon(points_polygon_2, layer=num_layer, datatype=datatype)
+            polygon_2 = gdspy.Polygon(points_polygon_2, layer=num_second_layer, datatype=second_datatype)
             cell.add(polygon_2)
 
             actual_enclosure = points_polygon_2[0][0] - points_polygon_1[0][0]
