@@ -55,6 +55,34 @@ def get_rule_parameters(rule_name):
 
     map_data = parse_map_file("Resources/65LPe.map")
 
+    def build_result(parm_1, parm_2, number, layer_name, map_data, second_layer_name=None):
+        if layer_name in map_data:
+            number_layer, datatype = map_data[layer_name]
+            if second_layer_name:
+                if second_layer_name in map_data:
+                    second_layer_number, second_datatype = map_data[second_layer_name]
+                    return {
+                        "parm_1": parm_1,
+                        "parm_2": parm_2,
+                        "number": number,
+                        "layer_name": layer_name,
+                        "number_layer": number_layer,
+                        "number_datatype": datatype,
+                        "second_layer_name": second_layer_name,
+                        "second_layer_number": second_layer_number,
+                        "second_datatype": second_datatype,
+                    }
+            else:
+                return {
+                    "parm_1": parm_1,
+                    "parm_2": parm_2,
+                    "number": number,
+                    "layer_name": layer_name,
+                    "number_layer": number_layer,
+                    "number_datatype": datatype,
+                }
+        return {"error": f"Layer {layer_name} or {second_layer_name} not found in map data."}
+
     with open("Resources/65LPe_V1830.psv", "r") as fpsv:
         for line in fpsv:
             split_text = line.split("|")
@@ -69,31 +97,12 @@ def get_rule_parameters(rule_name):
                     parm_3 = rule_parameters[3]
                     parm_2 = parm_2 + "_" + parm_3
                     second_layer_name = rule_parameters[4]
-                    if layer_name in map_data and second_layer_name in map_data:
-                        number_layer, datatype = map_data[layer_name]
-                        second_layer_number, second_datatype = map_data[second_layer_name]
-                        return {
-                            "parm_1": parm_1,
-                            "parm_2": parm_2,
-                            "number": number,
-                            "layer_name": layer_name,
-                            "number_layer": number_layer,
-                            "number_datatype": datatype,
-                            "second_layer_name": second_layer_name,
-                            "second_layer_number": second_layer_number,
-                            "second_datatype": second_datatype,
-                        }
+                    return build_result(parm_1, parm_2, number, layer_name, map_data, second_layer_name)
+                if parm_2 == "enclosure":
+                    second_layer_name = rule_parameters[3]
+                    return build_result(parm_1, parm_2, number, layer_name, map_data, second_layer_name)
                 else:
-                    if layer_name in map_data:
-                        number_layer, number_datatype = map_data[layer_name]
-                        return {
-                            "parm_1": parm_1,
-                            "parm_2": parm_2,
-                            "number": number,
-                            "layer_name": layer_name,
-                            "number_layer": number_layer,
-                            "number_datatype": number_datatype,
-                        }
+                    return build_result(parm_1, parm_2, number, layer_name, map_data)
 
     return {"error": f"Rule number {rule_name} doesn't exist."}
 
@@ -113,7 +122,7 @@ def rule_displaying(rule_name):
 
     function_name = construct_function_name(parm_1, parm_2)
 
-    if parm_2 == "overlap_past" or parm_2 == "overlap_of":
+    if parm_2 == "overlap_past" or parm_2 == "overlap_of" or parm_2 == "enclosure":
         second_layer_name = rule_data["second_layer_name"]
         second_layer_number = rule_data["second_layer_number"]
         second_datatype = rule_data["second_datatype"]
@@ -147,7 +156,7 @@ def export_file(rule_name):
 
     function_name = construct_function_name(parm_1, parm_2)
 
-    if parm_2 == "overlap_past" or parm_2 == "overlap_of":
+    if parm_2 == "overlap_past" or parm_2 == "overlap_of" or parm_2 == "enclosure":
         second_layer_name = rule_data["second_layer_name"]
         second_layer_number = rule_data["second_layer_number"]
         second_datatype = rule_data["second_datatype"]
@@ -160,8 +169,8 @@ def export_file(rule_name):
 
     else:
         results, lib, cell = call_function_by_name(
-        function_name, number, layer_name, number_layer, number_datatype
-    )
+            function_name, number, layer_name, number_layer, number_datatype
+        )
         call_function_by_name(f"export_file_{parm_1}_{parm_2}", lib, layer_name)
 
     return results
