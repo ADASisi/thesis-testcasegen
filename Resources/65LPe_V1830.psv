@@ -21,3 +21,10 @@
 |Metal and Via Design Rules|507aR|-|CA minimum enclosure M1|>=|0.04
 |MIM Capacitor Design rule|HCAP1c|-|HT maximum area|<=|4
 |MIM Capacitor Design rule|HCAP1|-|HT minimum width|>=|1
+|Metal and Via Design Rules|4Bx90NT|-|NTBAR exact width|=|0.36
+|Silicide-Blocked OP Resistor Design Rules|B_OP01|-|OP minimum width|>=|0.2
+|Silicide-Blocked OP Resistor Design Rules|739aR|-|RX exact overlap past OP|=|0.43
+|Silicide-Blocked OP Resistor Design Rules|739b|-|PC minimum overlap past OP|>=|0.22
+|Silicide-Blocked OP Resistor Design Rules|739bR|-|PC exact overlap past OP|=|0.4
+|Contact Design Rules|229|-|CABAR exact width|=|0.09
+|Contact Design Rules|230|-|CABAR minimum space|>=|0.21
