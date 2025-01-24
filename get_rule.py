@@ -136,7 +136,7 @@ def rule_displaying(rule_name):
             function_name, number, layer_name, number_layer, number_datatype
         )
 
-    call_function_by_name(f"display_file_{parm_1}_{parm_2}", cell)
+    call_function_by_name(f"display_file_{parm_2}", cell)
 
     return results, layer_name, lib, parm_1, parm_2
 
@@ -171,6 +171,6 @@ def export_file(rule_name):
         results, lib, cell = call_function_by_name(
             function_name, number, layer_name, number_layer, number_datatype
         )
-        call_function_by_name(f"export_file_{parm_1}_{parm_2}", lib, layer_name)
+        call_function_by_name(f"export_file_{parm_2}_rule", lib, layer_name, parm_1)
 
     return results
