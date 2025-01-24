@@ -22,6 +22,8 @@ def construct_function_name(parameter_1, parameter_2):
         func_name += "minimum_"
     elif parameter_1 == "maximum":
         func_name += "maximum_"
+    elif parameter_1 == "exact":
+        func_name += "exact_"
     if parameter_2 == "width":
         func_name += "width"
     elif parameter_2 == "area":
@@ -165,7 +167,7 @@ def export_file(rule_name):
             function_name, number, layer_name, second_layer_name,
             number_layer, second_layer_number, number_datatype, second_datatype
         )
-        call_function_by_name(f"export_file_{parm_1}_{parm_2}", lib, layer_name, second_layer_name)
+        call_function_by_name(f"export_file_{parm_2}_rule", lib, layer_name, second_layer_name, parm_1)
 
     else:
         results, lib, cell = call_function_by_name(

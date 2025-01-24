@@ -24,6 +24,3 @@ def get_layer_other_parameters(layer_name):
             if layer_name == rule_parameters[0] and "minimum" == rule_parameters[1]:
                 layer_specifications[rule_parameters[2]] = float(split_text[6].strip())
     return layer_specifications
-
-
-# print(get_layer_other_parameters("PC"))
