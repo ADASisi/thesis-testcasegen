@@ -3,29 +3,32 @@ import basic_functions
 
 lib = gdspy.GdsLibrary()
 
-results = []
+results_min = []
 
 
-def display_test_cases(i, actual_overlap, min_overlap):
-    if round(actual_overlap, 3) < min_overlap:
-        return f"Test case {i + 1}: Overlap = {round(actual_overlap, 3)} (Fail)"
-    else:
-        return f"Test case {i + 1}: Overlap = {round(actual_overlap, 3)} (Pass)"
+def display_test_cases(i, actual_overlap, rule_overlap, rule_type):
+    actual_overlap = round(actual_overlap, 3)
+    pass_fail = "Fail" if (
+        (rule_type == "min" and actual_overlap < rule_overlap)
+    ) else "Pass"
+    return f"Test case {i + 1}: Overlap = {actual_overlap} ({pass_fail})"
 
 
-def export_file_minimum_overlap_of(lib, first_layer_name, second_layer_name):
-    gds_filename = f"min_{first_layer_name}_overlap_of_{second_layer_name}_test.gds"
+def export_file_overlap_of_rule(lib, first_layer_name, second_layer_name, rule_type):
+    gds_filename = f"{rule_type}_{first_layer_name}_overlap_of_{second_layer_name}_test.gds"
     lib.write_gds(gds_filename)
 
 
-def display_file_minimum_overlap_of(cell):
+def display_file_overlap_of(cell):
     gdspy.LayoutViewer(cells=cell)
 
 
-def check_minimum_overlap_of(min_overlap, first_layer_name, second_layer_name, num_first_layer, num_second_layer,
-                             first_datatype, second_datatype):
+def check_overlap_of(rule_overlap, first_layer_name, second_layer_name, num_first_layer, num_second_layer,
+                     first_datatype, second_datatype, rule_type):
     global cell
-    cell_name = f"MIN_{first_layer_name}_OVERLAP_OF_{second_layer_name}_TEST"
+    cell_name = f"{rule_type.upper()}_{first_layer_name}_OVERLAP_OF_{second_layer_name}_TEST"
+    results = results_min if rule_type == "min" else results_min
+
     if basic_functions.cell_exists(lib, cell_name) is False:
         cell = lib.new_cell(cell_name)
 
@@ -36,7 +39,7 @@ def check_minimum_overlap_of(min_overlap, first_layer_name, second_layer_name, n
         else:
             big_height = big_width / 2
 
-        overlaps = basic_functions.generate_value(min_overlap)
+        overlaps = basic_functions.generate_value(rule_overlap)
 
         previous_x = basic_functions.base
 
@@ -59,9 +62,12 @@ def check_minimum_overlap_of(min_overlap, first_layer_name, second_layer_name, n
 
             actual_overlap = small_polygon_points[1][0] - big_polygon_points[0][0]
 
-            results.append(display_test_cases(i, actual_overlap, min_overlap))
+            results.append(display_test_cases(i, actual_overlap, rule_overlap, rule_type))
 
     return results, lib, cell
-    # gdspy.LayoutViewer()
 
-# check_minimum_overlap_of(1, "T3", "NW", 1, 2, 3, 3)
+
+def check_minimum_overlap_of(min_overlap, inside_layer_name, outside_layer_name, num_inside_layer, num_outside_layer,
+                             inside_datatype, outside_datatype):
+    return check_overlap_of(min_overlap, inside_layer_name, outside_layer_name, num_inside_layer, num_outside_layer,
+                            inside_datatype, outside_datatype, rule_type="min")

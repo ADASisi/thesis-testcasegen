@@ -46,7 +46,6 @@ def check_overlap_past(rule_overlap, inside_layer_name, outside_layer_name, num_
             else:
                 big_height = big_width / 2
 
-        print(big_width)
         overlaps = basic_functions.generate_value(rule_overlap)
 
         previous_x = basic_functions.base

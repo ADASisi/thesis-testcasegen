@@ -42,10 +42,7 @@ def check_area_rule(rule_area, layer_name, num_layer, datatype, rule_type):
                 basic_functions.base + i * width * 2, basic_functions.base, width, height
             )
             polygon = gdspy.Polygon(points, layer=num_layer, datatype=datatype)
-            if rule_type == "min":
-                cell.add(polygon)
-            if rule_type == "max":
-                cell.add(polygon)
+            cell.add(polygon)
 
             actual_area = width * height
 
