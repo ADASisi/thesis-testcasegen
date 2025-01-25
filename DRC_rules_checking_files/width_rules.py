@@ -13,7 +13,7 @@ def display_test_cases(i, actual_width, rule_width, rule_type):
             (rule_type == "min" and actual_width < rule_width) or
             (rule_type == "exact" and actual_width != rule_width)
     ) else "Pass"
-    return f"Test case {i + 1}: Area = {round(actual_width, 3)} ({pass_fail})"
+    return f"Test case {i + 1}: Width = {round(actual_width, 3)} ({pass_fail})"
 
 
 def export_file_width_rule(lib, layer_name, rule_type):

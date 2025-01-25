@@ -51,6 +51,7 @@ class ComboBoxExample(QWidget):
             self.label.setText(f"Selected: {description_rule}")
 
     def pressed_button_run_rule(self):
+        self.result_display.clear()
         selected_rule = self.select_rule.currentText()
         if selected_rule == "Please select a rule":
             self.result_display.setText("Please select a valid rule to display results.")

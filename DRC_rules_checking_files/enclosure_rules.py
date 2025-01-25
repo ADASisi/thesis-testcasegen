@@ -26,7 +26,7 @@ def display_file_enclosure(cell):
 def check_enclosure(rule_enclosure, first_layer_name, second_layer_name, num_first_layer, num_second_layer,
                     first_datatype, second_datatype, rule_type):
     global cell
-    cell_name = f"{rule_type.upper()}_{first_layer_name}_ENCLOSURE_OF_{second_layer_name}_TEST"
+    cell_name = f"{rule_type.upper()}_{first_layer_name}_ENCLOSURE_{second_layer_name}_TEST"
     results = results_min_enclosure if rule_type == "min" else results_min_enclosure
 
     if basic_functions.cell_exists(lib, cell_name) is False:

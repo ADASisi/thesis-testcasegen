@@ -11,7 +11,7 @@ def display_test_cases(i, actual_overlap, rule_overlap, rule_type):
     pass_fail = "Fail" if (
         (rule_type == "min" and actual_overlap < rule_overlap)
     ) else "Pass"
-    return f"Test case {i + 1}: Overlap = {actual_overlap} ({pass_fail})"
+    return f"Test case {i + 1}: Space = {actual_overlap} ({pass_fail})"
 
 
 def export_file_space_rule(lib, layer_name, rule_type):
