@@ -23,7 +23,7 @@ def display_file_enclosure(cell):
     gdspy.LayoutViewer(cells=cell)
 
 
-def check_enclosure(rule_enclosure, first_layer_name, second_layer_name, num_first_layer, num_second_layer,
+def check_enclosure_rule(rule_enclosure, first_layer_name, second_layer_name, num_first_layer, num_second_layer,
                     first_datatype, second_datatype, rule_type):
     global cell
     cell_name = f"{rule_type.upper()}_{first_layer_name}_ENCLOSURE_{second_layer_name}_TEST"
@@ -62,5 +62,5 @@ def check_enclosure(rule_enclosure, first_layer_name, second_layer_name, num_fir
 
 def check_minimum_enclosure(min_enclosure, first_layer_name, second_layer_name, num_first_layer, num_second_layer,
                                first_datatype, second_datatype):
-    return check_enclosure(min_enclosure, first_layer_name, second_layer_name, num_first_layer, num_second_layer,
+    return check_enclosure_rule(min_enclosure, first_layer_name, second_layer_name, num_first_layer, num_second_layer,
                               first_datatype, second_datatype, rule_type="min")

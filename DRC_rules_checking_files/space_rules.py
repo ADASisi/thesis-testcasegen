@@ -23,7 +23,7 @@ def display_file_space(cell):
     gdspy.LayoutViewer(cells=cell)
 
 
-def check_space_rule(min_space, layer_name, num_layer, datatype, rule_type):
+def check_space_rule(rule_space, layer_name, num_layer, datatype, rule_type):
     global cell
     cell_name = f"{layer_name}_{rule_type.upper()}_SPACE_TEST"
     results = results_min if rule_type == "min" else results_min
@@ -31,7 +31,7 @@ def check_space_rule(min_space, layer_name, num_layer, datatype, rule_type):
     if basic_functions.cell_exists(lib, cell_name) is False:
         cell = lib.new_cell(cell_name)
 
-        spaces = basic_functions.generate_value(min_space)
+        spaces = basic_functions.generate_value(rule_space)
 
         layer_specifications = basic_functions.get_layer_other_parameters(layer_name)
         width = layer_specifications["width"]
@@ -52,9 +52,9 @@ def check_space_rule(min_space, layer_name, num_layer, datatype, rule_type):
 
             actual_space = points2[0][0] - points1[1][0]
 
-            results.append(display_test_cases(i, actual_space, min_space, rule_type))
+            results.append(display_test_cases(i, actual_space, rule_space, rule_type))
 
-            previous_x = next_x + width + min_space
+            previous_x = next_x + width + rule_space
 
     return results, lib, cell
 

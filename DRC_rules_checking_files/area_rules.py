@@ -33,11 +33,12 @@ def check_area_rule(rule_area, layer_name, num_layer, datatype, rule_type):
         cell = lib.new_cell(cell_name)
 
         areas = basic_functions.generate_value(rule_area)
+        layer_specifications = basic_functions.get_layer_other_parameters(layer_name)
+        width = layer_specifications["width"]
 
         for i, area in enumerate(areas):
-            layer_specifications = basic_functions.get_layer_other_parameters(layer_name)
-            width = layer_specifications["width"]
             height = area / width
+
             points = basic_functions.generate_polygon_points(
                 basic_functions.base + i * width * 2, basic_functions.base, width, height
             )

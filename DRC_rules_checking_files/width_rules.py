@@ -34,9 +34,9 @@ def check_width_rule(rule_width, layer_name, num_layer, datatype, rule_type):
         cell = lib.new_cell(cell_name)
 
         widths = basic_functions.generate_value(rule_width)
+        layer_specifications = basic_functions.get_layer_other_parameters(layer_name)
 
         for i, width in enumerate(widths):
-            layer_specifications = basic_functions.get_layer_other_parameters(layer_name)
             if layer_specifications["area"] is not None:
                 height = layer_specifications["area"] / width
             else:
