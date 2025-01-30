@@ -20,9 +20,8 @@ Welcome to the **Test Structure Generator**—an innovative tool designed for th
   - `Gdspy`: Core library for creating and manipulating GDSII files.
   - `PyQt5`: Utilized for building an intuitive and interactive graphical user interface.
 - **Industry Tools**:
-  - **KLayout**: Open-source viewer and editor for GDSII files.
-  - **Virtuoso**: Industry-standard platform for IC design.
   - **Caliber**: Tool used for verification and rule checks.
+  - **KLayout**: Open-source viewer and editor for GDSII files.
 
 ## 💻 Installation Guide
 ### Prerequisites
@@ -36,15 +35,23 @@ Ensure Python is installed on your system. Python 3.6 or later is recommended.
    ```
 2. Install the required libraries:
    ```bash
-   pip install gdspy PyQt5
+    pip install -r requirements.txt
    ```
 3. (Optional) Install `KLayout` for better visualization and handling of GDSII files:
    - [Download KLayout](https://www.klayout.de/downloads.html)
 
+## 📂 `requirements.txt`
+Ensure your repository contains a requirements.txt file with the following content:
+```bash
+   PyQt5~=5.15.11
+   gdspy~=1.6.12
+   ```
+
+
 ## 🚀 Quick Start
 1. **Run the application**:
    ```bash
-   python main.py
+   python qui.py
    ```
 2. **Choose design rules** from the list or input your own custom parameters.
 3. **Generate and preview** test structures directly in the GUI.
