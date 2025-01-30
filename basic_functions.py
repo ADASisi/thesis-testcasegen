@@ -21,6 +21,6 @@ def get_layer_other_parameters(layer_name):
         for line in fpsv:
             split_text = line.split("|")
             rule_parameters = split_text[4].strip().split()
-            if layer_name == rule_parameters[0] and "minimum" == rule_parameters[1]:
+            if layer_name == rule_parameters[0]:
                 layer_specifications[rule_parameters[2]] = float(split_text[6].strip())
     return layer_specifications

@@ -1,7 +1,6 @@
 from PyQt5.QtWidgets import QApplication, QComboBox, QLabel, QVBoxLayout, QHBoxLayout, QWidget, QPushButton, QTextEdit
-import os
-import sys
-import glob
+from PyQt5.QtGui import QIcon
+import os, sys, glob
 import get_rule
 import dropdown_menu_functions
 
@@ -9,6 +8,8 @@ import dropdown_menu_functions
 class ComboBoxExample(QWidget):
     def __init__(self):
         super().__init__()
+        self.setWindowTitle("TestCaseGen")
+        self.setWindowIcon(QIcon("testcasegen.png"))
 
         self.select_rule = QComboBox()
 
