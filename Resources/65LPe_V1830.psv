@@ -5,7 +5,6 @@
 |PC Design Rules|101a|-|PC minimum area|>=|0.042
 |PC Design Rules|102|-|PC minimum space|>=|0.12
 |M1 and V1 Design Rules|500|-|M1 minimum width|>=|0.09
-|M1 and V1 Design Rules|500b|-|M1 maximum width|<=|12
 |M1 and V1 Design Rules|501|-|M1 minimum area|>=|0.042
 |M1 and V1 Design Rules|502|-|M1 minimum space|>=|0.09
 |Mx and Vx Design Rules|600_M2|-|M2 minimum width|>=|0.1
