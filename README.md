@@ -64,7 +64,12 @@ Ensure your repository contains a requirements.txt file with the following conte
 3. **Export & Verify**: Save the structure and verify it using `Caliber`.
 
 ## 📸 Screenshots
-_Showcase interactive previews, rule selection screens, and structure verification displays here._
+![Screenshot 2025-01-27 004353](https://github.com/user-attachments/assets/6fbbb80c-4d87-4126-b1a6-ba02277a84b9)
+![Screenshot 2025-01-27 005218](https://github.com/user-attachments/assets/4c821e39-fff9-4231-9127-1186f55a75d2)
+![Screenshot 2025-01-27 013106](https://github.com/user-attachments/assets/9b471168-7f04-4f1e-8ae9-9643ded83fdf)
+![image](https://github.com/user-attachments/assets/00966ade-660f-4844-a38a-214170b887f5)
+![MIN_T3_OVERLAP_OF_NW_TEST_no_markers](https://github.com/user-attachments/assets/f2993923-85c9-424d-8fd4-6bd42aa94659)
+<img width="482" alt="PC_MIN_AREA_TEST_with_markers" src="https://github.com/user-attachments/assets/2afa617e-4aa8-4ab3-98b1-a078f14f2bca" />
 
 ## 🤝 Acknowledgments
 This project was made possible through the guidance and support of my thesis advisor Petar Ivanov from GlobalFoundries.
