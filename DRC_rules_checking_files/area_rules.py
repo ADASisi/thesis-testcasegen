@@ -49,6 +49,9 @@ def check_area_rule(rule_area, layer_name, num_layer, datatype, rule_type):
 
             results.append(display_test_cases(i, actual_area, rule_area, rule_type))
 
+    else:
+        cell = lib.cells[cell_name]
+
     return results, lib, cell
 
 

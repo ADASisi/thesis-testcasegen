@@ -5,7 +5,7 @@ def get_rules_name():
             split_text = line.strip().split("|")
             if len(split_text) > 2:
                 options_dropdown_menu.append(split_text[2])
-    options_dropdown_menu.sort()
+    # options_dropdown_menu.sort()
     return options_dropdown_menu
 
 

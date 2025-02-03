@@ -71,6 +71,9 @@ def check_overlap_past(rule_overlap, inside_layer_name, outside_layer_name, num_
 
             results.append(display_test_cases(i, actual_overlap, rule_overlap, rule_type))
 
+        else:
+            cell = lib.cells[cell_name]
+
     return results, lib, cell
 
 

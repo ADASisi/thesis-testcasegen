@@ -52,6 +52,9 @@ def check_width_rule(rule_width, layer_name, num_layer, datatype, rule_type):
 
             results.append(display_test_cases(i, actual_width, rule_width, rule_type))
 
+    else:
+        cell = lib.cells[cell_name]
+
     return results, lib, cell
 
 
