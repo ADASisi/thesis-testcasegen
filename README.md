@@ -55,7 +55,7 @@ Ensure your repository contains a requirements.txt file with the following conte
    ```
 2. **Choose design rules** from the list or input your own custom parameters.
 3. **Generate and preview** test structures directly in the GUI.
-4. **Export** the structure for use in tools like KLayout, Virtuoso, or Caliber.
+4. **Export** the structure in GDSII format.
 5. **Verify** the design using integrated verification routines or with third-party tools for thorough compliance checks.
 
 ## 🔍 Example Workflow
