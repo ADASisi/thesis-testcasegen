@@ -31,9 +31,11 @@ def check_enclosure_rule(rule_enclosure, first_layer_name, second_layer_name, nu
 
     if basic_functions.cell_exists(lib, cell_name) is False:
         cell = lib.new_cell(cell_name)
+
         second_layer_specifications = basic_functions.get_layer_other_parameters(second_layer_name)
         width = second_layer_specifications["width"]
         height = width
+
         enclosure_areas = basic_functions.generate_value(rule_enclosure)
 
         previous_x = basic_functions.base
@@ -56,6 +58,9 @@ def check_enclosure_rule(rule_enclosure, first_layer_name, second_layer_name, nu
             actual_enclosure = points_polygon_2[0][0] - points_polygon_1[0][0]
 
             results.append(display_test_cases(i, actual_enclosure, rule_enclosure, rule_type))
+
+    else:
+        cell = lib.cells[cell_name]
 
     return results, lib, cell
 

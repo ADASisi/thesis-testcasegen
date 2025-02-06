@@ -3,8 +3,8 @@ import basic_functions
 
 lib = gdspy.GdsLibrary()
 
-results_min = []
-results_max = []
+results_min = {}
+results_max = {}
 
 
 def display_test_cases(i, actual_area, rule_area, rule_type):
@@ -29,6 +29,8 @@ def check_area_rule(rule_area, layer_name, num_layer, datatype, rule_type):
     cell_name = f"{layer_name}_{rule_type.upper()}_AREA_TEST"
     results = results_min if rule_type == "min" else results_max
 
+    results.setdefault(layer_name, [])
+
     if basic_functions.cell_exists(lib, cell_name) is False:
         cell = lib.new_cell(cell_name)
 
@@ -47,12 +49,12 @@ def check_area_rule(rule_area, layer_name, num_layer, datatype, rule_type):
 
             actual_area = width * height
 
-            results.append(display_test_cases(i, actual_area, rule_area, rule_type))
+            results[layer_name].append(display_test_cases(i, actual_area, rule_area, rule_type))
 
     else:
         cell = lib.cells[cell_name]
 
-    return results, lib, cell
+    return results[layer_name], lib, cell
 
 
 def check_minimum_area(min_area, layer_name, num_layer, datatype):

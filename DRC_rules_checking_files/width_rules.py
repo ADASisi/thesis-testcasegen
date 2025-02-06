@@ -3,8 +3,8 @@ import basic_functions
 
 lib = gdspy.GdsLibrary()
 
-results_min = []
-results_exact = []
+results_min = {}
+results_exact = {}
 
 
 def display_test_cases(i, actual_width, rule_width, rule_type):
@@ -30,6 +30,8 @@ def check_width_rule(rule_width, layer_name, num_layer, datatype, rule_type):
     cell_name = f"{layer_name}_{rule_type.upper()}_WIDTH_TEST"
     results = results_min if rule_type == "min" else results_exact
 
+    results.setdefault(layer_name, [])
+
     if basic_functions.cell_exists(lib, cell_name) is False:
         cell = lib.new_cell(cell_name)
 
@@ -50,12 +52,12 @@ def check_width_rule(rule_width, layer_name, num_layer, datatype, rule_type):
             bounding_box = polygon.get_bounding_box()
             actual_width = bounding_box[1][0] - bounding_box[0][0]
 
-            results.append(display_test_cases(i, actual_width, rule_width, rule_type))
+            results[layer_name].append(display_test_cases(i, actual_width, rule_width, rule_type))
 
     else:
         cell = lib.cells[cell_name]
 
-    return results, lib, cell
+    return results[layer_name], lib, cell
 
 
 def check_minimum_width(min_width, layer_name, num_layer, datatype):

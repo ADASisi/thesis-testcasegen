@@ -3,7 +3,7 @@ import basic_functions
 
 lib = gdspy.GdsLibrary()
 
-results_min = []
+results_min = {}
 
 
 def display_test_cases(i, actual_overlap, rule_overlap, rule_type):
@@ -27,6 +27,8 @@ def check_space_rule(rule_space, layer_name, num_layer, datatype, rule_type):
     global cell
     cell_name = f"{layer_name}_{rule_type.upper()}_SPACE_TEST"
     results = results_min if rule_type == "min" else results_min
+
+    results.setdefault(layer_name, [])
 
     if basic_functions.cell_exists(lib, cell_name) is False:
         cell = lib.new_cell(cell_name)
@@ -52,11 +54,14 @@ def check_space_rule(rule_space, layer_name, num_layer, datatype, rule_type):
 
             actual_space = points2[0][0] - points1[1][0]
 
-            results.append(display_test_cases(i, actual_space, rule_space, rule_type))
+            results[layer_name].append(display_test_cases(i, actual_space, rule_space, rule_type))
 
             previous_x = next_x + width + rule_space
 
-    return results, lib, cell
+    else:
+        cell = lib.cells[cell_name]
+
+    return results[layer_name], lib, cell
 
 
 def check_minimum_space(min_space, layer_name, num_layer, datatype):

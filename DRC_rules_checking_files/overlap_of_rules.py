@@ -64,6 +64,9 @@ def check_overlap_of(rule_overlap, first_layer_name, second_layer_name, num_firs
 
             results.append(display_test_cases(i, actual_overlap, rule_overlap, rule_type))
 
+    else:
+        cell = lib.cells[cell_name]
+
     return results, lib, cell
 
 
