@@ -21,7 +21,7 @@ def export_file_area_rule(lib, layer_name, rule_type):
 
 
 def display_file_area(cell):
-    gdspy.LayoutViewer(cells=cell)
+    gdspy.LayoutViewer(cells=cell, pattern={'default': 5}, background='#FFFFFF')
 
 
 def check_area_rule(rule_area, layer_name, num_layer, datatype, rule_type):

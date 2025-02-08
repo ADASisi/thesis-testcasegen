@@ -22,7 +22,7 @@ def export_file_width_rule(lib, layer_name, rule_type):
 
 
 def display_file_width(cell):
-    gdspy.LayoutViewer(cells=cell)
+    gdspy.LayoutViewer(cells=cell, pattern={'default': 5}, background='#FFFFFF')
 
 
 def check_width_rule(rule_width, layer_name, num_layer, datatype, rule_type):

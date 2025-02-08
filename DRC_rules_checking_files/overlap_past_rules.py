@@ -22,7 +22,7 @@ def export_file_overlap_past_rule(lib, inside_layer_name, outside_layer_name, ru
 
 
 def display_file_overlap_past(cell):
-    gdspy.LayoutViewer(cells=cell)
+    gdspy.LayoutViewer(cells=cell, pattern={'default': 5}, background='#FFFFFF')
 
 
 def check_overlap_past(rule_overlap, inside_layer_name, outside_layer_name, num_inside_layer, num_outside_layer,

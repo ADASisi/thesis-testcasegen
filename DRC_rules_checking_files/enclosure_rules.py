@@ -20,7 +20,7 @@ def export_file_enclosure_rule(lib, first_layer_name, second_layer_name, rule_ty
 
 
 def display_file_enclosure(cell):
-    gdspy.LayoutViewer(cells=cell)
+    gdspy.LayoutViewer(cells=cell, pattern={'default': 5}, background='#FFFFFF')
 
 
 def check_enclosure_rule(rule_enclosure, first_layer_name, second_layer_name, num_first_layer, num_second_layer,

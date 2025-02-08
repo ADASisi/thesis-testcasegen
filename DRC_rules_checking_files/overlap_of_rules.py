@@ -20,7 +20,7 @@ def export_file_overlap_of_rule(lib, first_layer_name, second_layer_name, rule_t
 
 
 def display_file_overlap_of(cell):
-    gdspy.LayoutViewer(cells=cell)
+    gdspy.LayoutViewer(cells=cell, pattern={'default': 5}, background='#FFFFFF')
 
 
 def check_overlap_of(rule_overlap, first_layer_name, second_layer_name, num_first_layer, num_second_layer,

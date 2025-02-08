@@ -20,7 +20,7 @@ def export_file_space_rule(lib, layer_name, rule_type):
 
 
 def display_file_space(cell):
-    gdspy.LayoutViewer(cells=cell)
+    gdspy.LayoutViewer(cells=cell, pattern={'default': 5}, background='#FFFFFF')
 
 
 def check_space_rule(rule_space, layer_name, num_layer, datatype, rule_type):
