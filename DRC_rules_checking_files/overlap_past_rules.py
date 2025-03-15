@@ -56,14 +56,19 @@ def check_overlap_past(rule_overlap, inside_layer_name, outside_layer_name, num_
             small_polygon_points = basic_functions.generate_polygon_points(
                 x_offset, basic_functions.base + overlap / 2, big_width - overlap / 2, big_height - overlap
             )
+            print(small_polygon_points)
             polygon_1 = gdspy.Polygon(small_polygon_points, layer=num_outside_layer, datatype=outside_datatype)
             cell.add(polygon_1)
 
             next_x = x_offset - overlap
+            next_x = round(next_x, 3)
 
             big_polygon_points = basic_functions.generate_polygon_points(
-                next_x, basic_functions.base, big_width, big_height
+                next_x, basic_functions.base - overlap / 2, big_width, big_height + overlap
             )
+            print(overlap)
+            print(next_x, basic_functions.base, big_width, big_height)
+            print(big_polygon_points)
             polygon_2 = gdspy.Polygon(big_polygon_points, layer=num_inside_layer, datatype=inside_datatype)
             cell.add(polygon_2)
 
