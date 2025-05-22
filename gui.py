@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QApplication, QComboBox, QLabel, QVBoxLayout, QHBoxLayout, QWidget, QPushButton, QTextEdit
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QFont
 import os, sys, glob
 import get_rule
 import dropdown_menu_functions
@@ -10,6 +10,10 @@ class ComboBoxExample(QWidget):
         super().__init__()
         self.setWindowTitle("TestCaseGen")
         self.setWindowIcon(QIcon("testcasegen.png"))
+        self.resize(1000, 600)
+
+        font = QFont("Sans Serif", 15)
+        self.setFont(font)
 
         self.select_rule = QComboBox()
 
@@ -26,15 +30,19 @@ class ComboBoxExample(QWidget):
 
         self.display_button = QPushButton("&Display")
         self.create_file_button = QPushButton("&Export rule as a file")
+        self.display_and_create_button = QPushButton("&Display and Export rule as a file")
 
         self.select_rule.currentIndexChanged.connect(self.selection_changed)
         self.display_button.clicked.connect(self.pressed_button_run_rule)
         self.create_file_button.clicked.connect(self.pressed_button_export_file)
+        self.display_and_create_button.clicked.connect(self.pressed_button_export_file)
+        self.display_and_create_button.clicked.connect(self.pressed_button_run_rule)
 
         h_layout = QHBoxLayout()
         h_layout.addWidget(self.select_rule)
         h_layout.addWidget(self.display_button)
         h_layout.addWidget(self.create_file_button)
+        h_layout.addWidget(self.display_and_create_button)
 
         layout = QVBoxLayout()
         layout.addLayout(h_layout)
@@ -69,8 +77,8 @@ class ComboBoxExample(QWidget):
             self.result_display.setText("Please select a valid rule to export.")
             return
         try:
-            get_rule.export_file(selected_rule_name)
-            self.result_display.setText(f"Rule {selected_rule_name} exported successfully.")
+            results = get_rule.export_file(selected_rule_name)
+            self.result_display.setText("".join(results))
         except Exception as e:
             self.result_display.setText(f"Export failed: {str(e)}")
 

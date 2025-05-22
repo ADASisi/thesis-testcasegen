@@ -167,12 +167,22 @@ def export_file(rule_name):
             function_name, number, layer_name, second_layer_name,
             number_layer, second_layer_number, number_datatype, second_datatype
         )
-        call_function_by_name(f"export_file_{parm_2}_rule", lib, layer_name, second_layer_name, parm_1)
+
+        if os.path.exists(f"{parm_1}_{layer_name}_{parm_2}_{second_layer_name}_test.gds"):
+            results = "This file already exists."
+        else:
+            call_function_by_name(f"export_file_{parm_2}_rule", lib, layer_name, second_layer_name, parm_1)
+            results = "Rule exported successfully."
 
     else:
         results, lib, cell = call_function_by_name(
             function_name, number, layer_name, number_layer, number_datatype
         )
-        call_function_by_name(f"export_file_{parm_2}_rule", lib, layer_name, parm_1)
+
+        if os.path.exists(f"{layer_name}_{parm_1}_{parm_2}_test.gds"):
+            results = "This file already exists."
+        else:
+            call_function_by_name(f"export_file_{parm_2}_rule", lib, layer_name, parm_1)
+            results = "Rule exported successfully."
 
     return results
